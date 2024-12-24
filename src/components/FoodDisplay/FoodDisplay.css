@@ -1,0 +1,82 @@
+.food-display {
+    margin-top: 20px;
+}
+
+.food-display h2 {
+    font-size: 1.5rem;
+    color: #000;
+    margin-bottom: 40px;
+}
+
+.food-display-list {
+   display: grid;   
+   grid-template-columns: 350px 350px 350px;
+   padding-left: 30px;
+}   
+
+.food-display-list-item {
+    margin-bottom: 20px;
+}   
+
+.food-display-list-item img {
+    width: 320px;
+    height: 200px;
+    cursor: pointer;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px; 
+    object-fit: cover;
+}   
+
+
+.food-display-list-item h3 {
+    margin-top: 20px;
+    color: blue;
+    font-size: 1.5rem;  
+}
+
+.food-display-list-item h4 {
+    margin-top: 20px;
+    color: #000;
+    font-size: 1.2rem;  
+}
+
+.item-details {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+   
+}
+
+.item-details p {
+    margin-top: 20px;
+    color: #000;
+    padding-right: 30px;
+    font-size: 14px;  
+}
+
+.item-time {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    color: blue;
+}
+ 
+
+.item-time i {
+   font-size: 14px;
+}
+ 
+.item-button {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: blue;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.item-button:hover {
+    background: #000;
+    color: #fff;
+}
