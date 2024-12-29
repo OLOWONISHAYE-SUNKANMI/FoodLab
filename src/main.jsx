@@ -12,8 +12,8 @@ root.render(
   <StrictMode>
     <BrowserRouter>
       <StoreContextProvider>
-      <CartProvider>
-        <App />
+        <CartProvider>
+          <App />
         </CartProvider>
       </StoreContextProvider>
     </BrowserRouter>

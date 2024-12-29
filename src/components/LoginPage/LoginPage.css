@@ -1,0 +1,20 @@
+.login-page {
+    display: flex;
+    padding: 4rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+}
+
+.login-image {
+    margin-right : 2rem;
+}
+
+.login-image img {
+    border-radius: 20px;
+}
+

@@ -1,66 +1,31 @@
-.navbar {
-    padding: 20px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.navbar .logo {
-    width: 150px;   
-}
-
-.navbar-menu {
-    display: flex;
-    list-style: none;
-    gap: 20px;
-    color: #49557e;
-    font-size: 18px;
-}
-
-.navbar-right {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-}
-
-.navbar button {
-    background: transparent;
-    font-family: 15px;
-    color: #49557e;
-    border: 1px solid blue;
-    padding: 10px 30px;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.navbar button:hover {
-    background-color: #03009d;
-    color: #fff;
-}
-
-.navbar .active {
-    padding-bottom: 2px;
-    border-bottom: 2px solid blue;
-}
-
-.navbar li {
-    cursor: pointer;
-    margin-right: 20px;
-    
-}
-
-.navbar-search-icon {
-    position: relative;
-}
-
-.navbar-search-icon .dot {
-    position: absolute;
-    min-width: 10px;
-    min-height: 10px;
-    background-color: blue;
-    border-radius: 5px;
-    top: -8px;
-    right: -8px;
-}
-
+.menu-open {
+    display: block;
+    animation: slideIn 0.3s forwards;
+  }
+  
+  .menu-closed {
+    display: none;
+    animation: slideOut 0.3s forwards;
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideOut {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+  }
