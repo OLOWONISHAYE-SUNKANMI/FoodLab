@@ -12,7 +12,7 @@ const ForgetPasswordBody = () => {
     e.preventDefault();
     // Add your forgot password logic here
     if (email === 'test@example.com') { // Example condition for existing email
-      setMessage('If an account with that email exists, a password reset link has been sent.');
+      setMessage(' A password reset link has been sent.');
     } else {
       setMessage('Email does not exist.');
     }

@@ -10,7 +10,7 @@ import Cart from './components/Cart/Cart';
 import { CartProvider } from './context/CartContext';
 import Login from './pages/SignIn/Login';
 import RegisterPage from './pages/SignUp/Register';
-import ForgotPassword from './pages/ForgetPassword/ForgetPassword';
+import ForgotPassword from './pages/ForgetPassword/ForgetPassword'; // Corrected import
 
 const App = () => {
   const location = useLocation();
@@ -18,7 +18,11 @@ const App = () => {
   return (
     <CartProvider>
       <div className='app'>
-        {location.pathname !== '/login' && location.pathname !== '/register' && location.pathname !== '/forgot-password' && location.pathname !== '/verify-account' && <Navbar />}
+        {location.pathname !== '/login' && 
+         location.pathname !== '/register' && 
+         location.pathname !== '/forgot-password' && 
+         location.pathname !== '/verify-account' && 
+         location.pathname !== '/cart' && <Navbar />}
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/menu' element={<Menu />} />
