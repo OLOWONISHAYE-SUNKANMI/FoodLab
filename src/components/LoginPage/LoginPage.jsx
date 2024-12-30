@@ -8,15 +8,25 @@ const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
 
   const handleLogin = (e) => {
     e.preventDefault();
     // Add your login logic here
     if (email === 'test@example.com' && password === 'password') {
-      navigate('/');
+      setPopupMessage('Login successful! Redirecting to your dashboard...');
+      setShowPopup(true);
+      setTimeout(() => {
+        navigate('/user-dashboard');
+      }, 10000); // Redirect after 10 seconds
     } else {
       setError('Incorrect email or password');
     }
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
   };
 
   return (
@@ -71,6 +81,21 @@ const LoginPage = () => {
           </p>
         </div>
       </div>
+      {showPopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-4 rounded shadow-lg">
+            <p>{popupMessage}</p>
+            <div className="flex justify-center mt-4">
+              <button
+                onClick={closePopup}
+                className="p-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+              >
+                OK
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

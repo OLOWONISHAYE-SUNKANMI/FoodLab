@@ -20,7 +20,6 @@ const FoodDisplay = ({ category }) => {
                                 : 'food-display-list-item hidden'}>
                             <img className='item-image' src={item.image} alt={item.name || 'Food item'} />
                             <h3 className='item-restaurant'> {item.restaurant}</h3>
-                            <p className='item-category'>{item.category}</p>
 
                             <div className='item-details'>
                             <p className='item-price'> ₦ {item.price_range}</p>

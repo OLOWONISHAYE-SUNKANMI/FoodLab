@@ -80,7 +80,7 @@ const OurTeam = () => {
 
           <SwiperSlide>
             <div className='flex flex-col items-center'>
-              <img src={Group_5} alt="Group_5" className='w-24 h-24 md:w-36 md:h-36 rounded-full mx-5' />
+              <img src={Group_5} alt="Group_5" className='w-14 h-14 md:w-36 md:h-36 rounded-full mx-5' />
               <h4 className='text-white text-lg mt-5'>Simire Joshua</h4>
               <h5 className='text-white text-lg mt-2'>General Manager</h5>
               <p className='text-white text-sm mt-5 px-4 md:px-36 lg:px-72 mb-10'>

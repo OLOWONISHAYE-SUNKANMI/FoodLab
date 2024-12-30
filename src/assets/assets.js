@@ -126,7 +126,7 @@ export const restaurant_list = [
         image: food_2,
         price_range: '1000 - 5000',
         delivery_time: "40 - 50 mins",
-        category: "Jollof"
+        category: "Jollof Rice"
     },
   
 ]

@@ -9,7 +9,7 @@ const AboutHeader = () => {
           Whether you’re here for a quick bite, a celebration, or just to unwind,
           our welcoming atmosphere and attentive team are here to make every visit memorable.
         </h4>
-        <button className='px-6 md:px-8 lg:px-12 py-2 md:py-3 lg:py-5 border-none text-blue-500 mt-5 md:mt-7 text-xs md:text-sm lg:text-base rounded-md shadow-md transition duration-300 ease-in-out hover:text-white hover:bg-blue-500'>
+        <button className='px-6 md:px-8 lg:px-12 py-2 md:py-3 lg:py-5 border-none text-blue-500 mt-5 md:mt-7 text-xs md:text-sm lg:text-base rounded-md shadow-md transition duration-300 ease-in-out bg-white hover:text-white hover:bg-blue-500'>
           Learn More
         </button>
       </div>
