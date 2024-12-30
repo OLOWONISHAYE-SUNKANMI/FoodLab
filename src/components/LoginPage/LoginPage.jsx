@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LoginPageImage from '../../assets/LoginPage.png'; // Rename the imported image
+import LoginPageImage from '../../assets/LoginPage.png'; // Ensure this path is correct
 import './LoginPage.css'; // Import custom CSS for styling
 
 const LoginPage = () => {

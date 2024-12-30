@@ -5,6 +5,8 @@ import './RegisterPage.css'; // Import custom CSS for styling
 
 const RegisterPage = () => {
   const navigate = useNavigate();
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -16,6 +18,8 @@ const RegisterPage = () => {
       setError('Passwords do not match');
     } else {
       // Add your registration logic here
+      console.log('First Name:', firstName);
+      console.log('Last Name:', lastName);
       console.log('Email:', email);
       console.log('Password:', password);
       navigate('/login');
@@ -29,6 +33,22 @@ const RegisterPage = () => {
           <h1 className="text-3xl font-bold mb-4">Register</h1>
           {error && <p className="text-red-500">{error}</p>}
           <form className="space-y-4" onSubmit={handleRegister}>
+            <input
+              type="text"
+              placeholder="First Name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded"
+              required
+            />
+            <input
+              type="text"
+              placeholder="Last Name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded"
+              required
+            />
             <input
               type="email"
               placeholder="Email"

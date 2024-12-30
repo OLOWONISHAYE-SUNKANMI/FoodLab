@@ -9,7 +9,8 @@ import Quickpicks from './components/MenuBody/Quickpicks/Quickpicks';
 import Cart from './components/Cart/Cart';
 import { CartProvider } from './context/CartContext';
 import Login from './pages/SignIn/Login';
-import RegisterPage from './pages/SignUp/Register'; // Import the RegisterPage component
+import RegisterPage from './pages/SignUp/Register';
+import ForgotPassword from './pages/ForgetPassword/ForgetPassword'; // Ensure this path is correct
 
 const App = () => {
   const location = useLocation();
@@ -17,14 +18,15 @@ const App = () => {
   return (
     <CartProvider>
       <div className='app'>
-        {location.pathname !== '/login' && location.pathname !== '/register' && <Navbar />}
+        {location.pathname !== '/login' && location.pathname !== '/register' && location.pathname !== '/forgot-password' && <Navbar />}
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/menu' element={<Menu />} />
           <Route path='/about' element={<AboutUs />} />
           <Route path='/contact-us' element={<ContactUs />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<RegisterPage />} /> {/* Add the register route */}
+          <Route path='/register' element={<RegisterPage />} />
+          <Route path='/forgot-password' element={<ForgotPassword />} /> {/* Add the forgot password route */}
           <Route path='/quickpicks' element={<Quickpicks />} />
           <Route path='/cart' element={<Cart />} />
         </Routes>
