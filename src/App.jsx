@@ -10,7 +10,8 @@ import Cart from './components/Cart/Cart';
 import { CartProvider } from './context/CartContext';
 import Login from './pages/SignIn/Login';
 import RegisterPage from './pages/SignUp/Register';
-import ForgotPassword from './pages/ForgetPassword/ForgetPassword'; // Corrected import
+import ForgotPassword from './pages/ForgetPassword/ForgetPassword';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'; // Import ProtectedRoute
 
 const App = () => {
   const location = useLocation();
@@ -32,7 +33,14 @@ const App = () => {
           <Route path='/register' element={<RegisterPage />} />
           <Route path='/forgot-password' element={<ForgotPassword />} />
           <Route path='/quickpicks' element={<Quickpicks />} />
-          <Route path='/cart' element={<Cart />} />
+          <Route
+            path='/cart'
+            element={
+              <ProtectedRoute>
+                <Cart />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </div>
     </CartProvider>
