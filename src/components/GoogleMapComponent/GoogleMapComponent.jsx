@@ -1,15 +1,5 @@
 import React, { useState } from 'react';
-import { GoogleMap, LoadScript, Autocomplete } from '@react-google-maps/api';
-
-const containerStyle = {
-  width: '400px',
-  height: '400px'
-};
-
-const center = {
-  lat: -3.745,
-  lng: -38.523
-};
+import { LoadScript, Autocomplete } from '@react-google-maps/api';
 
 const GoogleMapComponent = ({ onPlaceSelected }) => {
   const [autocomplete, setAutocomplete] = useState(null);
@@ -36,9 +26,6 @@ const GoogleMapComponent = ({ onPlaceSelected }) => {
           style={{ width: '100%', padding: '12px' }}
         />
       </Autocomplete>
-      <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10}>
-        {/* Child components, such as markers, info windows, etc. */}
-      </GoogleMap>
     </LoadScript>
   );
 };

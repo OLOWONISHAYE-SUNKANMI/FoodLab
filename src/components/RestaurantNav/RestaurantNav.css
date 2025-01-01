@@ -1,4 +1,4 @@
-.navbar {
+.navigation {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -44,4 +44,7 @@
     width: 100%;
     border-radius: 50px;
   }
-    
+  
+  .google-map-input {
+    margin-right: 20px;
+  }
