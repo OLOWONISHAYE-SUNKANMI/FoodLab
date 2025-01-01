@@ -12,6 +12,7 @@ import Login from './pages/SignIn/Login';
 import RegisterPage from './pages/SignUp/Register';
 import ForgotPassword from './pages/ForgetPassword/ForgetPassword';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'; // Import ProtectedRoute
+import RestaurantPage from './pages/RestaurantPage/RestaurantPage';
 
 const App = () => {
   const location = useLocation();
@@ -23,6 +24,7 @@ const App = () => {
          location.pathname !== '/register' && 
          location.pathname !== '/forgot-password' && 
          location.pathname !== '/verify-account' && 
+         location.pathname !== '/restaurant-page' && // Updated condition
          location.pathname !== '/cart' && <Navbar />}
         <Routes>
           <Route path='/' element={<Home />} />
@@ -33,6 +35,7 @@ const App = () => {
           <Route path='/register' element={<RegisterPage />} />
           <Route path='/forgot-password' element={<ForgotPassword />} />
           <Route path='/quickpicks' element={<Quickpicks />} />
+          <Route path='/restaurant-page' element={<RestaurantPage />} />
           <Route
             path='/cart'
             element={

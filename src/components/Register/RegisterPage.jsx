@@ -36,7 +36,7 @@ const RegisterPage = () => {
     // Add your OTP verification logic here
     if (otp === '123456') { // Example OTP for demonstration
       setOtpError('');
-      navigate('/user-dashboard');
+      navigate('/restaurant-page');
     } else {
       setOtpError('Invalid OTP');
     }
