@@ -11,8 +11,9 @@ import { CartProvider } from './context/CartContext';
 import Login from './pages/SignIn/Login';
 import RegisterPage from './pages/SignUp/Register';
 import ForgotPassword from './pages/ForgetPassword/ForgetPassword';
-import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'; // Import ProtectedRoute
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import RestaurantPage from './pages/RestaurantPage/RestaurantPage';
+import RestaurantMenuPage from './pages/RestaurantMenuPage/RestaurantMenuPage'; // Import the new RestaurantMenuPage component
 
 const App = () => {
   const location = useLocation();
@@ -24,7 +25,8 @@ const App = () => {
          location.pathname !== '/register' && 
          location.pathname !== '/forgot-password' && 
          location.pathname !== '/verify-account' && 
-         location.pathname !== '/restaurant-page' && // Updated condition
+         location.pathname !== '/restaurant-page' && 
+         !location.pathname.startsWith('/restaurant/') && // Updated condition to exclude /restaurant/:id
          location.pathname !== '/cart' && <Navbar />}
         <Routes>
           <Route path='/' element={<Home />} />
@@ -36,6 +38,7 @@ const App = () => {
           <Route path='/forgot-password' element={<ForgotPassword />} />
           <Route path='/quickpicks' element={<Quickpicks />} />
           <Route path='/restaurant-page' element={<RestaurantPage />} />
+          <Route path='/restaurant/:id' element={<RestaurantMenuPage />} /> {/* Define the route for the restaurant menu page */}
           <Route
             path='/cart'
             element={

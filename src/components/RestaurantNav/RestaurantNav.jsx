@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo_2.png';
 import profile_icon from '../../assets/profile_icon.png';
 import GoogleMapComponent from '../GoogleMapComponent/GoogleMapComponent';
 

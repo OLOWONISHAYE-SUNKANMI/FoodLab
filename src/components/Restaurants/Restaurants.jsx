@@ -1,7 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Restaurants = ({ restaurant_list }) => {
-  console.log('restaurant_list:', restaurant_list); // Debugging: Log restaurant_list
+  const navigate = useNavigate();
+
+  const handleRestaurantClick = (restaurantId) => {
+    navigate(`/restaurant/${restaurantId}`);
+  };
 
   return (
     <div className="flex h-screen">
@@ -26,10 +31,14 @@ const Restaurants = ({ restaurant_list }) => {
       {/* Restaurant Section */}
       <div className="flex-grow p-8 bg-white">
         <h1 className="text-left ml-8 mb-8 text-2xl">Restaurants near you</h1>
-        <div className="grid ml-8 grid-cols-3 gap-8"> {/* Increased gap for more spacing */}
+        <div className="grid ml-8 grid-cols-3 gap-8">
           {Array.isArray(restaurant_list) && restaurant_list.length > 0 ? (
             restaurant_list.map((restaurant) => (
-              <div className="w-64 rounded-lg overflow-hidden transition-transform transform hover:translate-y-1 bg-white mb-8" key={restaurant._id}> {/* Increased mb-8 for more spacing */}
+              <div
+                className="w-64 rounded-lg overflow-hidden transition-transform transform hover:translate-y-1 bg-white mb-8 cursor-pointer"
+                key={restaurant._id}
+                onClick={() => handleRestaurantClick(restaurant._id)}
+              >
                 <img src={restaurant.image} alt={restaurant.name} className="w-full h-40 object-cover" />
                 <div className="p-4">
                   <h2 className="text-xl mb-2 text-gray-800">{restaurant.restaurant}</h2>
