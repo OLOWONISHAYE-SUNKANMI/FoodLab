@@ -59,16 +59,16 @@ const Navbar = () => {
       </div>
       <div className="hidden lg:flex flex-grow justify-center">
         <ul className="flex list-none gap-5 text-gray-700 text-lg">
-          <li onClick={() => handleMenuClick("/")} className={`cursor-pointer ${menu === "/" ? "border-b-2 border-blue-500" : ""}`}>
+          <li onClick={() => handleMenuClick("/")} className={`cursor-pointer ${menu === "/" ? "active" : ""}`}>
             <Link to="/" className="no-underline">Home</Link>
           </li>
-          <li onClick={() => handleMenuClick("/about")} className={`cursor-pointer ${menu === "/about" ? "border-b-2 border-blue-500" : ""}`}>
+          <li onClick={() => handleMenuClick("/about")} className={`cursor-pointer ${menu === "/about" ? "active" : ""}`}>
             <Link to="/about" className="no-underline">About</Link>
           </li>
-          <li onClick={() => handleMenuClick("/menu")} className={`cursor-pointer ${menu === "/menu" ? "border-b-2 border-blue-500" : ""}`}>
+          <li onClick={() => handleMenuClick("/menu")} className={`cursor-pointer ${menu === "/menu" ? "active" : ""}`}>
             <Link to="/menu" className="no-underline">Menu</Link>
           </li>
-          <li onClick={() => handleMenuClick("/contact-us")} className={`cursor-pointer ${menu === "/contact-us" ? "border-b-2 border-blue-500" : ""}`}>
+          <li onClick={() => handleMenuClick("/contact-us")} className={`cursor-pointer ${menu === "/contact-us" ? "active" : ""}`}>
             <Link to="/contact-us" className="no-underline">Contact Us</Link>
           </li>
         </ul>
@@ -91,16 +91,16 @@ const Navbar = () => {
             </svg>
           </button>
           <ul className="flex flex-col gap-5 text-gray-700 text-lg">
-            <li onClick={() => handleMenuClick("/")} className={`cursor-pointer ${menu === "/" ? "border-b-2 border-blue-500" : ""}`}>
+            <li onClick={() => handleMenuClick("/")} className={`cursor-pointer ${menu === "/" ? "active" : ""}`}>
               <Link to="/" className="no-underline">Home</Link>
             </li>
-            <li onClick={() => handleMenuClick("/about")} className={`cursor-pointer ${menu === "/about" ? "border-b-2 border-blue-500" : ""}`}>
+            <li onClick={() => handleMenuClick("/about")} className={`cursor-pointer ${menu === "/about" ? "active" : ""}`}>
               <Link to="/about" className="no-underline">About</Link>
             </li>
-            <li onClick={() => handleMenuClick("/menu")} className={`cursor-pointer ${menu === "/menu" ? "border-b-2 border-blue-500" : ""}`}>
+            <li onClick={() => handleMenuClick("/menu")} className={`cursor-pointer ${menu === "/menu" ? "active" : ""}`}>
               <Link to="/menu" className="no-underline">Menu</Link>
             </li>
-            <li onClick={() => handleMenuClick("/contact-us")} className={`cursor-pointer ${menu === "/contact-us" ? "border-b-2 border-blue-500" : ""}`}>
+            <li onClick={() => handleMenuClick("/contact-us")} className={`cursor-pointer ${menu === "/contact-us" ? "active" : ""}`}>
               <Link to="/contact-us" className="no-underline">Contact Us</Link>
             </li>
             <li className="flex items-center gap-5 mt-5">
@@ -117,7 +117,7 @@ const Navbar = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Navbar;

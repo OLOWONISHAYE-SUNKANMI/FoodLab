@@ -8,6 +8,7 @@ const RegisterPage = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState(''); // Added state for phone number
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
@@ -24,6 +25,7 @@ const RegisterPage = () => {
       console.log('First Name:', firstName);
       console.log('Last Name:', lastName);
       console.log('Email:', email);
+      console.log('Phone Number:', phoneNumber); // Log phone number
       console.log('Password:', password);
       setShowVerification(true);
     }
@@ -34,7 +36,7 @@ const RegisterPage = () => {
     // Add your OTP verification logic here
     if (otp === '123456') { // Example OTP for demonstration
       setOtpError('');
-      navigate('/user-dashboard');
+      navigate('/restaurant-page');
     } else {
       setOtpError('Invalid OTP');
     }
@@ -69,6 +71,14 @@ const RegisterPage = () => {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                className="w-full md:w-3/4 p-2 border border-gray-300 rounded"
+                required
+              />
+              <input
+                type="text"
+                placeholder="Phone Number"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
                 className="w-full md:w-3/4 p-2 border border-gray-300 rounded"
                 required
               />

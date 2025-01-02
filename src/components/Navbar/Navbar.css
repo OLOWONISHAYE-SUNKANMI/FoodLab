@@ -1,3 +1,26 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #fff;
+  border: none; /* Ensure no border is added */
+}
+
+.navbar a {
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Inherit color from parent */
+  padding: 10px;
+}
+
+.navbar a:hover {
+  text-decoration: none; /* Ensure no underline on hover */
+}
+
+.navbar .active {
+  border-bottom: none; /* Ensure no border is added to active link */
+}
+
 .menu-open {
     display: block;
     animation: slideIn 0.3s forwards;
