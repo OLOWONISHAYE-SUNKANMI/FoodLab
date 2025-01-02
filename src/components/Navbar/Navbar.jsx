@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { assets } from "../../assets/assets";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Navbar.css'; // Import the custom CSS for animation
@@ -9,6 +9,13 @@ const Navbar = () => {
   const [menu, setMenu] = useState(location.pathname);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isNavVisible, setIsNavVisible] = useState(true);
+
+  const [isSignedIn, setIsSignedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('foodLabToken');
+    setIsSignedIn(!!token);
+  }, []);
 
   const handleMenuClick = (path) => {
     setMenu(path);
@@ -23,9 +30,17 @@ const Navbar = () => {
   };
 
   const handleSignInClick = () => {
-    navigate('/login'); // Navigate to the login page
     setIsMenuOpen(false); // Close the menu after navigation
     setIsNavVisible(false); // Hide the navigation
+
+    if (isSignedIn) {
+      localStorage.removeItem('foodLabToken');
+      setIsSignedIn(false);
+      // alert('You have been logged out.');
+      navigate('/login');
+    } else {
+      navigate('/login');
+    }
   };
 
   if (!isNavVisible) {
@@ -65,7 +80,7 @@ const Navbar = () => {
           <div className="absolute w-2.5 h-2.5 bg-blue-500 rounded-full top-0 right-0"></div>
         </div>
         <button onClick={handleSignInClick} className="bg-transparent text-gray-700 border border-blue-500 px-4 py-2 rounded-full transition duration-300 ease-in-out hover:bg-blue-500 hover:text-white">
-          Sign In
+          {isSignedIn ? 'Log Out' : 'Sign In'}
         </button>
       </div>
       <div className={`fixed inset-0 bg-gray-800 bg-opacity-75 z-50 transform ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out lg:hidden`}>

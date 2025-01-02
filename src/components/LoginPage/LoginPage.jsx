@@ -1,33 +1,45 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LoginPageImage from '../../assets/LoginPage.png'; // Ensure this path is correct
-import './LoginPage.css'; // Import custom CSS for styling
+// import jwtDecode from 'jwt-decode'; 
+import LoginPageImage from '../../assets/LoginPage.png';
+import './LoginPage.css';
+import { API_BASE_URL } from '../../env';
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [showPopup, setShowPopup] = useState(false);
-  const [popupMessage, setPopupMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Add your login logic here
-    if (email === 'test@example.com' && password === 'password') {
-      setPopupMessage('Login successful! Redirecting to your dashboard...');
-      setShowPopup(true);
-      setTimeout(() => {
-        navigate('/user-dashboard');
-      }, 10000); // Redirect after 10 seconds
-    } else {
-      setError('Incorrect email or password');
+    setLoading(true);
+    setError('');
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/users/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to login');
+      }
+
+      const { token } = data;
+
+      localStorage.setItem('foodLabToken', token);
+
+      navigate('/menu');
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const closePopup = () => {
-    setShowPopup(false);
-  };
 
   return (
     <div className="flex justify-center items-center p-16">
@@ -57,45 +69,14 @@ const LoginPage = () => {
             />
             <button
               type="submit"
-              className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+              className={`w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-700 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              disabled={loading}
             >
-              Login
+              {loading ? 'Logging in...' : 'Login'}
             </button>
           </form>
-          <p className="mt-4">
-            <span
-              className="text-blue-500 cursor-pointer hover:underline"
-              onClick={() => navigate('/forgot-password')}
-            >
-              Forgot Password?
-            </span>
-          </p>
-          <p className="mt-4">
-            New here?{' '}
-            <span
-              className="text-blue-500 cursor-pointer hover:underline"
-              onClick={() => navigate('/register')}
-            >
-              Sign up
-            </span>
-          </p>
         </div>
       </div>
-      {showPopup && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-4 rounded shadow-lg">
-            <p>{popupMessage}</p>
-            <div className="flex justify-center mt-4">
-              <button
-                onClick={closePopup}
-                className="p-2 bg-blue-500 text-white rounded hover:bg-blue-700"
-              >
-                OK
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
