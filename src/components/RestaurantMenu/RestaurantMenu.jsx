@@ -3,9 +3,13 @@ import { FiSearch } from 'react-icons/fi';
 import { menuItems } from '../../assets/assets'; // Corrected import path
 
 const RestaurantMenuPage = () => {
+  const handleAddToCart = (item) => {
+    // Add to cart functionality
+    console.log('Added to cart:', item);
+  };
+
   return (
     <div className="min-h-screen">
-
       {/* Main Layout */}
       <div className="flex mt-6 px-6">
         {/* Sidebar */}
@@ -49,6 +53,12 @@ const RestaurantMenuPage = () => {
                   <h3 className="text-lg font-semibold">{item.name}</h3>
                   <p className="text-gray-600">{item.description}</p>
                   <p className="text-blue-500 font-bold">&#8358;{item.price}</p>
+                  <button
+                    onClick={() => handleAddToCart(item)}
+                    className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
+                  >
+                    Add to Cart
+                  </button>
                 </div>
               </div>
             ))}
