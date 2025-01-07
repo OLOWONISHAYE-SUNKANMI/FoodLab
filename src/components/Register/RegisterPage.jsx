@@ -1,149 +1,189 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SignUpPageImage from '../../assets/SignUpPage.png'; // Add the path to your SignUpPage image
-import './RegisterPage.css'; // Import custom CSS for styling
+import axios from 'axios';
+import SignUpPageImage from '../../assets/SignUpPage.png'; 
+import './RegisterPage.css'; 
+import toast from 'react-hot-toast';
+import { API_BASE_URL } from '../../env';
+
 
 const RegisterPage = () => {
   const navigate = useNavigate();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState(''); // Added state for phone number
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [showVerification, setShowVerification] = useState(false);
   const [otp, setOtp] = useState('');
   const [otpError, setOtpError] = useState('');
+  const [loading, setLoading] = useState(false); 
+  const [otpLoading, setOtpLoading] = useState(false); 
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setError('Passwords do not match');
-    } else {
-      // Add your registration logic here
-      console.log('First Name:', firstName);
-      console.log('Last Name:', lastName);
-      console.log('Email:', email);
-      console.log('Phone Number:', phoneNumber); // Log phone number
-      console.log('Password:', password);
+      return;
+    }
+    setLoading(true);
+    try {
+      const response = await axios.post('http://localhost:5000/api/users/register', {
+        firstName,
+        lastName,
+        phone: phoneNumber,
+        email,
+        password,
+      });
+      setLoading(false);
       setShowVerification(true);
+      toast.success('Registration successful. Check your email for OTP.');
+    } catch (err) {
+      setLoading(false);
+      setError('Registration failed. Please try again.');
+      toast.error(err.response.data.message);
     }
   };
 
-  const handleOtpVerification = (e) => {
-    e.preventDefault();
-    // Add your OTP verification logic here
-    if (otp === '123456') { // Example OTP for demonstration
-      setOtpError('');
-      navigate('/restaurant-page');
+const handleOtpVerification = async (e) => {
+  e.preventDefault();
+  if (!otp) {
+    setOtpError('Please enter OTP');
+    return;
+  }
+  setOtpLoading(true);
+  try {
+    // Send OTP verification request
+    const response = await axios.post(`${API_BASE_URL}/api/users/verify-otp`, {
+      email,
+      otp,
+    });
+    setOtpLoading(false);
+
+    if (response.data.message && response.data.message.includes('Account verified successfully')) {
+      toast.success('Email verified successfully!');
+      
+      const { token } = response.data;
+      localStorage.setItem('foodLabToken', token);
+
+      navigate('/menu');
     } else {
       setOtpError('Invalid OTP');
+      toast.error('Invalid OTP');
     }
-  };
+  } catch (err) {
+    setOtpLoading(false);
+    setOtpError('OTP verification failed. Please try again.');
+    toast.error(err.response.data.message);
+  }
+};
 
-  return (
-    <div className="flex justify-center items-center p-16">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {!showVerification ? (
-          <div className="register-form transition-transform transform">
-            <h1 className="text-3xl font-bold mb-4">Register</h1>
-            {error && <p className="text-red-500">{error}</p>}
-            <form className="space-y-4" onSubmit={handleRegister}>
-              <input
-                type="text"
-                placeholder="First Name"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                className="w-full md:w-3/4 p-2 border border-gray-300 rounded"
-                required
-              />
-              <input
-                type="text"
-                placeholder="Last Name"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                className="w-full md:w-3/4 p-2 border border-gray-300 rounded"
-                required
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full md:w-3/4 p-2 border border-gray-300 rounded"
-                required
-              />
-              <input
-                type="text"
-                placeholder="Phone Number"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-                className="w-full md:w-3/4 p-2 border border-gray-300 rounded"
-                required
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full md:w-3/4 p-2 border border-gray-300 rounded"
-                required
-              />
-              <input
-                type="password"
-                placeholder="Confirm Password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full md:w-3/4 p-2 border border-gray-300 rounded"
-                required
-              />
-              <button
-                type="submit"
-                className="w-full md:w-3/4 p-2 bg-blue-500 text-white rounded hover:bg-blue-700"
-              >
-                Register
-              </button>
-            </form>
-            <p className="mt-4">
-              Already have an account?{' '}
-              <span
-                className="text-blue-500 cursor-pointer hover:underline"
-                onClick={() => navigate('/login')}
-              >
-                Login
-              </span>
-            </p>
-          </div>
-        ) : (
-          <div className="verification-form transition-transform transform translate-x-0">
-            <h2 className="text-3xl font-bold mb-4">Account Verification</h2>
-            <p>Check Email for OTP</p>
-            <form className="space-y-4 mt-4" onSubmit={handleOtpVerification}>
-              <input
-                type="text"
-                placeholder="Enter OTP"
-                value={otp}
-                onChange={(e) => setOtp(e.target.value)}
-                className="w-full md:w-3/4 p-2 border border-gray-300 rounded"
-                required
-              />
-              {otpError && <p className="text-red-500">{otpError}</p>}
-              <button
-                type="submit"
-                className="w-full md:w-3/4 p-2 bg-blue-500 text-white rounded hover:bg-blue-700"
-              >
-                Verify
-              </button>
-            </form>
-          </div>
-        )}
-        <div className="register-image hidden md:block">
-          <img src={SignUpPageImage} alt="SignUpPage" className="rounded-2xl" />
-        </div>
-      </div>
+
+return (
+  <div className="register-page-container">
+    <div className="register-form transition-transform transform">
+      {!showVerification ? (
+        <>
+          <h1 className="text-3xl font-bold mb-4">Register</h1>
+          <form className="space-y-4" onSubmit={handleRegister}>
+            <input
+              type="text"
+              placeholder="First Name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded"
+              required
+            />
+            <input
+              type="text"
+              placeholder="Last Name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded"
+              required
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded"
+              required
+            />
+            <input
+              type="text"
+              placeholder="Phone Number"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded"
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded"
+              required
+            />
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded"
+              required
+            />
+            <button
+              type="submit"
+              className={`w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-700 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              disabled={loading}
+            >
+              {loading ? 'Registering...' : 'Register'}
+            </button>
+          </form>
+          <p className="mt-4">
+            Already have an account?{' '}
+            <span
+              className="text-blue-500 cursor-pointer hover:underline"
+              onClick={() => navigate('/login')}
+            >
+              Login
+            </span>
+          </p>
+        </>
+      ) : (
+        <>
+          <h2 className="text-3xl font-bold mb-4">Account Verification</h2>
+          <p>Check Email for OTP</p>
+          <form className="space-y-4 mt-4" onSubmit={handleOtpVerification}>
+            <input
+              type="text"
+              placeholder="Enter OTP"
+              value={otp}
+              onChange={(e) => setOtp(e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded"
+              required
+            />
+            <button
+              type="submit"
+              className={`w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-700 ${otpLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              disabled={otpLoading}
+            >
+              {otpLoading ? 'Verifying...' : 'Verify'}
+            </button>
+          </form>
+        </>
+      )}
     </div>
-  );
+    <div className="register-image hidden md:block">
+      <img src={SignUpPageImage} alt="SignUpPage" className="rounded-2xl" />
+    </div>
+  </div>
+);
+
 };
 
 export default RegisterPage;

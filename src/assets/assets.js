@@ -14,7 +14,7 @@ import menu_8 from './menu_8.png'
 import food_1 from './food_1.jpg'
 import food_2 from './food_2.jpg'
 import food_3 from './food_3.jpg'
-import food_4 from './food_4.png'  
+import food_4 from './food_4.png'
 import food_5 from './food_5.png'
 import food_6 from './food_6.png'
 import food_7 from './food_7.png'
@@ -71,7 +71,7 @@ export const menu_list = [
         menu_image: menu_1
     },
     {
-        menu_name: "Burgers",
+        menu_name: "Main Course",
         menu_image: menu_2
     },
     {
@@ -105,7 +105,7 @@ export const restaurant_list = [
         restaurant: "Golden Bite Sharwarma",
         name: "SHAWARMA",
         image: food_1,
-        price_range: "500 - 2000",  
+        price_range: "500 - 2000",
         delivery_time: "30 - 40 mins",
         category: "Shawarma"
     },
@@ -114,7 +114,7 @@ export const restaurant_list = [
         restaurant: "Allinot Cafe",
         name: "Naija Varieties",
         image: food_3,
-        price_range: "1000 - 5000",  
+        price_range: "1000 - 5000",
         delivery_time: "30 - 40 mins",
         category: "Naija Food"
     },
@@ -128,42 +128,42 @@ export const restaurant_list = [
         delivery_time: "40 - 50 mins",
         category: "Jollof Rice"
     },
-  
+
 ]
 
 
 export const menuItems = [
     {
-      id: 1,
-      restaurant: "BSJ - Smoke Jollof",
-      name: "JOLLOF RICE",
-      price: 1500,
-      image: food_4,
-      delivery_time: "40 - 50 mins",
+        id: 1,
+        restaurant: "BSJ - Smoke Jollof",
+        name: "JOLLOF RICE",
+        price: 1500,
+        image: food_4,
+        delivery_time: "40 - 50 mins",
     },
     {
-      id: 2,
-      restaurant: "BSJ - Smoke Jollof",
-      name: "JOLLOF RICE",
-      price: 1500,
-      image: food_5,
-      delivery_time: "40 - 50 mins",
+        id: 2,
+        restaurant: "BSJ - Smoke Jollof",
+        name: "JOLLOF RICE",
+        price: 1500,
+        image: food_5,
+        delivery_time: "40 - 50 mins",
     },
     {
-      id: 3,
-      restaurant: "BSJ - Smoke Jollof",
-      name: "JOLLOF RICE",
-      price: 1500,
-      image: food_6,
-      delivery_time: "40 - 50 mins",
+        id: 3,
+        restaurant: "BSJ - Smoke Jollof",
+        name: "JOLLOF RICE",
+        price: 1500,
+        image: food_6,
+        delivery_time: "40 - 50 mins",
     },
     {
-       id: 4,
-      restaurant: "BSJ - Smoke Jollof",
-      name: "JOLLOF RICE",
-      price: 1500,
-      image: food_7,
-      delivery_time: "40 - 50 mins",
+        id: 4,
+        restaurant: "BSJ - Smoke Jollof",
+        name: "JOLLOF RICE",
+        price: 1500,
+        image: food_7,
+        delivery_time: "40 - 50 mins",
     },
     {
         id: 5,
@@ -229,6 +229,6 @@ export const menuItems = [
         image: food_15,
         delivery_time: "40 - 50 mins",
     },
-  ];
-  
-  export default menuItems;
+];
+
+export default menuItems;

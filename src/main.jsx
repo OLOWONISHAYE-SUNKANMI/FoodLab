@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import StoreContextProvider from './context/StoreContext.jsx';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext.jsx'; // Import AuthProvider
+import { Toaster } from 'react-hot-toast';
 
 const root = createRoot(document.getElementById('root'));
 
@@ -16,6 +17,23 @@ root.render(
         <StoreContextProvider>
           <CartProvider>
             <App />
+            <Toaster
+            position="bottom-right"
+            toastOptions={{
+              success: {
+                style: {
+                  background: 'green',
+                  color: 'white',
+                },
+              },
+              error: {
+                style: {
+                  background: 'red',
+                  color: 'white',
+                },
+              },
+            }}
+          />
           </CartProvider>
         </StoreContextProvider>
       </AuthProvider>

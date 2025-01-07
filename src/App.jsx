@@ -13,13 +13,18 @@ import RegisterPage from './pages/SignUp/Register';
 import ForgotPassword from './pages/ForgetPassword/ForgetPassword';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import RestaurantPage from './pages/RestaurantPage/RestaurantPage';
-import RestaurantMenuPage from './pages/RestaurantMenuPage/RestaurantMenuPage'; // Import the new RestaurantMenuPage component
+import RestaurantMenuPage from './pages/RestaurantMenuPage/RestaurantMenuPage';
+import ScrollToTop from '../scrollToTop';
+
+import 'leaflet/dist/leaflet.css';
+
 
 const App = () => {
   const location = useLocation();
 
   return (
     <CartProvider>
+      <ScrollToTop />
       <div className='app'>
         {location.pathname !== '/login' && 
          location.pathname !== '/register' && 
@@ -30,7 +35,8 @@ const App = () => {
          location.pathname !== '/cart' && <Navbar />}
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/menu' element={<Menu />} />
+          
+          <Route path='/menu' element={<ProtectedRoute><Menu /></ProtectedRoute> } />
           <Route path='/about' element={<AboutUs />} />
           <Route path='/contact-us' element={<ContactUs />} />
           <Route path='/login' element={<Login />} />
@@ -38,7 +44,7 @@ const App = () => {
           <Route path='/forgot-password' element={<ForgotPassword />} />
           <Route path='/quickpicks' element={<Quickpicks />} />
           <Route path='/restaurant-page' element={<RestaurantPage />} />
-          <Route path='/restaurant/:id' element={<RestaurantMenuPage />} /> {/* Define the route for the restaurant menu page */}
+          <Route path='/restaurant/:id' element={<RestaurantMenuPage />} />
           <Route
             path='/cart'
             element={

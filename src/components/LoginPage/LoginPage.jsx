@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import LoginPageImage from '../../assets/LoginPage.png';
 import './LoginPage.css';
 import { API_BASE_URL } from '../../env';
+import toast from 'react-hot-toast';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -35,50 +36,58 @@ const LoginPage = () => {
       navigate('/menu');
     } catch (error) {
       setError(error.message);
+      toast.error(error.message)
     } finally {
       setLoading(false);
     }
   };
 
 
-  return (
-    <div className="flex justify-center items-center p-16">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="login-image mr-8 hidden md:block">
-          <img src={LoginPageImage} alt="LoginPage" className="rounded-2xl" />
-        </div>
-        <div className="login-form">
-          <h1 className="text-3xl font-bold mb-4">Login</h1>
-          {error && <p className="text-red-500">{error}</p>}
-          <form className="space-y-4" onSubmit={handleLogin}>
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded"
-              required
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded"
-              required
-            />
-            <button
-              type="submit"
-              className={`w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-700 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
-              disabled={loading}
-            >
-              {loading ? 'Logging in...' : 'Login'}
-            </button>
-          </form>
-        </div>
-      </div>
+return (
+  <div className="login-page-container">
+    <div className="login-form transition-transform transform">
+      <h1 className="text-3xl font-bold mb-4">Login</h1>
+      <form className="space-y-4" onSubmit={handleLogin}>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full p-2 border border-gray-300 rounded"
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-full p-2 border border-gray-300 rounded"
+          required
+        />
+        <button
+          type="submit"
+          className={`w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-700 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+          disabled={loading}
+        >
+          {loading ? 'Logging in...' : 'Login'}
+        </button>
+      </form>
+      <p className="mt-4">
+        I don't have an account?{' '}
+        <span
+          className="text-blue-500 cursor-pointer hover:underline"
+          onClick={() => navigate('/register')}
+        >
+          Register
+        </span>
+      </p>
     </div>
-  );
+    <div className="login-image hidden md:block">
+      <img src={LoginPageImage} alt="LoginPage" className="rounded-2xl" />
+    </div>
+  </div>
+);
+
 };
 
 export default LoginPage;

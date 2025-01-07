@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { assets } from "../../assets/assets";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Navbar.css'; // Import the custom CSS for animation
+import Modal from 'react-modal';
 
 const Navbar = () => {
   const location = useLocation();
@@ -11,6 +12,8 @@ const Navbar = () => {
   const [isNavVisible, setIsNavVisible] = useState(true);
 
   const [isSignedIn, setIsSignedIn] = useState(false);
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false); // State to handle modal visibility
+  const [searchQuery, setSearchQuery] = useState(''); // State to store search input
 
   useEffect(() => {
     const token = localStorage.getItem('foodLabToken');
@@ -43,8 +46,28 @@ const Navbar = () => {
     }
   };
 
+  const handleSearchClick = () => {
+    if (isSignedIn) {
+      // Open the search modal if the user is signed in
+      setIsSearchModalOpen(true);
+    } else {
+      // Navigate to the login page if not signed in
+      navigate('/login');
+    }
+  };
+
+  const handleSearchInputChange = (e) => {
+    setSearchQuery(e.target.value); // Update the search input state
+  };
+
+  const handleSearchSubmit = () => {
+    console.log('Searching for:', searchQuery);
+    // Close the modal after search
+    setIsSearchModalOpen(false);
+  };
+
   if (!isNavVisible) {
-    return null; // Do not render the Navbar if isNavVisible is false
+    return null; 
   }
 
   return (
@@ -65,7 +88,7 @@ const Navbar = () => {
           <li onClick={() => handleMenuClick("/about")} className={`cursor-pointer ${menu === "/about" ? "active" : ""}`}>
             <Link to="/about" className="no-underline">About</Link>
           </li>
-          <li onClick={() => handleMenuClick("/menu")} className={`cursor-pointer ${menu === "/menu" ? "active" : ""}`}>
+          <li onClick={() => handleMenMenuClick("/menu")} className={`cursor-pointer ${menu === "/menu" ? "active" : ""}`}>
             <Link to="/menu" className="no-underline">Menu</Link>
           </li>
           <li onClick={() => handleMenuClick("/contact-us")} className={`cursor-pointer ${menu === "/contact-us" ? "active" : ""}`}>
@@ -74,7 +97,7 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="hidden lg:flex items-center gap-5">
-        <img src={assets.search_icon} alt="Search" className="w-6 h-6" />
+        <img src={assets.search_icon} alt="Search" className="w-6 h-6" onClick={handleSearchClick} />
         <div className="relative cursor-pointer" onClick={handleCartClick}>
           <img src={assets.basket_icon} alt="Basket" className="w-6 h-6" />
           <div className="absolute w-2.5 h-2.5 bg-blue-500 rounded-full top-0 right-0"></div>
@@ -86,7 +109,7 @@ const Navbar = () => {
       <div className={`fixed inset-0 bg-gray-800 bg-opacity-75 z-50 transform ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out lg:hidden`}>
         <div className="flex flex-col h-full p-5 bg-white w-64">
           <button onClick={() => setIsMenuOpen(false)} className="self-end text-gray-700 focus:outline-none mb-5">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"  xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
           </button>
@@ -116,6 +139,27 @@ const Navbar = () => {
           </ul>
         </div>
       </div>
+
+      {/* Modal for search */}
+      <Modal
+        isOpen={isSearchModalOpen}
+        onRequestClose={() => setIsSearchModalOpen(false)}
+        contentLabel="Search Menu"
+      >
+        <div>
+          <h2 className="text-lg mb-4">Search for Menu Items</h2>
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={handleSearchInputChange}
+            className="border p-2 w-full mb-4"
+            placeholder="Search menu"
+          />
+          <button onClick={handleSearchSubmit} className="bg-blue-500 text-white px-4 py-2 rounded-full">
+            Search
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 };

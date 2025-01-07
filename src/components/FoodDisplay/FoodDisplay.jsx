@@ -1,30 +1,31 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StoreContext } from '../../context/StoreContext.jsx';
-import { AuthContext } from '../../context/AuthContext.jsx'; // Import AuthContext
+// import { AuthContext } from '../../context/AuthContext.jsx'; // Import AuthContext
 import './FoodDisplay.css';
 import 'material-design-icons/iconfont/material-icons.css';
 
 const FoodDisplay = ({ category }) => {
   const { restaurant_list } = useContext(StoreContext);
-  const { isAuthenticated } = useContext(AuthContext); // Get authentication status
   const navigate = useNavigate();
 
-  const handleNavigate = (restaurantId) => {
-    if (isAuthenticated) {
-      navigate(`/restaurant/${restaurantId}`);
-    } else {
-      navigate('/login'); // Redirect to login page if not authenticated
-    }
-  };
+const handleNavigate = (restaurantId) => {
+  const token = localStorage.getItem('foodLabToken');
+  if (token) {
+    navigate(`/restaurant/${restaurantId}`);
+  } else {
+    navigate('/login');
+  }
+};
 
-  const handleSeeAllRestaurants = () => {
-    if (isAuthenticated) {
-      navigate('/restaurants'); // Adjust the path as needed
-    } else {
-      navigate('/login'); // Redirect to login page if not authenticated
-    }
-  };
+const handleSeeAllRestaurants = () => {
+  const token = localStorage.getItem('foodLabToken');
+  if (token) {
+    navigate('/restaurants'); 
+  } else {
+    navigate('/login');
+  }
+};
 
   return (
     <div className='food-display' id='food-display'>

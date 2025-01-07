@@ -18,7 +18,7 @@ const GoogleMapComponent = ({ onPlaceSelected }) => {
   };
 
   return (
-    <LoadScript googleMapsApiKey="YOUR_GOOGLE_MAPS_API_KEY" libraries={['places']}>
+    <LoadScript googleMapsApiKey="AlzaSyUOY_zJL2wnAPIB3Ws7gq-Spgc_0gfdeTN" libraries={['places']}>
       <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
         <input
           type="text"
